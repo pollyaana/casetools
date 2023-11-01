@@ -1,4 +1,4 @@
-#define   Name       "Летняя практика"
+#define   Name       "Г‹ГҐГІГ­ГїГї ГЇГ°Г ГЄГІГЁГЄГ "
 #define   Version    "0.0.1"
 #define   ExeName    "Practice.exe"
 [Setup]
@@ -6,38 +6,39 @@
 AppId={{8270B570-5D4D-40A2-BA29-B4107ED3997A}
 AppName={#Name}
 AppVersion={#Version}
-; Путь установки по-умолчанию
+; ГЏГіГІГј ГіГ±ГІГ Г­Г®ГўГЄГЁ ГЇГ®-ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 DefaultDirName={commonpf}\{#Name}
-; Имя группы в меню "Пуск"
+; Г€Г¬Гї ГЈГ°ГіГЇГЇГ» Гў Г¬ГҐГ­Гѕ "ГЏГіГ±ГЄ"
 DefaultGroupName={#Name}
 
-; Каталог, куда будет записан собранный setup и имя исполняемого файла
+; ГЉГ ГІГ Г«Г®ГЈ, ГЄГіГ¤Г  ГЎГіГ¤ГҐГІ Г§Г ГЇГЁГ±Г Г­ Г±Г®ГЎГ°Г Г­Г­Г»Г© setup ГЁ ГЁГ¬Гї ГЁГ±ГЇГ®Г«Г­ГїГҐГ¬Г®ГЈГ® ГґГ Г©Г«Г 
 OutputDir=D:\NDT
 OutputBaseFileName=test-setup
 
-SetupIconFile=C:\Users\Home\Desktop\ггг\Algos5\Practice\Practice\2240293.ico
+SetupIconFile=C:\Users\Home\Desktop\ГЈГЈГЈ\Algos5\Practice\Practice\2240293.ico
 
-; Параметры сжатия
+; ГЏГ Г°Г Г¬ГҐГІГ°Г» Г±Г¦Г ГІГЁГї
 Compression=lzma
 SolidCompression=yes
 [Languages]
 Name: "russian"; MessagesFile: "D:\Inno Setup 6\Languages\Russian.isl"
+Name: "english"; MessagesFile: "D:\Inno Setup 6\Languages\English.isl"
 ;------------------------------------------------------------------------------
-;   Опционально - некоторые задачи, которые надо выполнить при установке
+;   ГЋГЇГ¶ГЁГ®Г­Г Г«ГјГ­Г® - Г­ГҐГЄГ®ГІГ®Г°Г»ГҐ Г§Г Г¤Г Г·ГЁ, ГЄГ®ГІГ®Г°Г»ГҐ Г­Г Г¤Г® ГўГ»ГЇГ®Г«Г­ГЁГІГј ГЇГ°ГЁ ГіГ±ГІГ Г­Г®ГўГЄГҐ
 ;------------------------------------------------------------------------------
 [Tasks]
-; Создание иконки на рабочем столе
+; Г‘Г®Г§Г¤Г Г­ГЁГҐ ГЁГЄГ®Г­ГЄГЁ Г­Г  Г°Г ГЎГ®Г·ГҐГ¬ Г±ГІГ®Г«ГҐ
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 ;------------------------------------------------------------------------------
-;   Файлы, которые надо включить в пакет установщика
+;   Г”Г Г©Г«Г», ГЄГ®ГІГ®Г°Г»ГҐ Г­Г Г¤Г® ГўГЄГ«ГѕГ·ГЁГІГј Гў ГЇГ ГЄГҐГІ ГіГ±ГІГ Г­Г®ГўГ№ГЁГЄГ 
 ;------------------------------------------------------------------------------
 [Files]
 
-; Исполняемый файл
-Source: "C:\Users\Home\Desktop\ггг\Algos5\Practice\Practice\bin\Debug\Practice.exe"; DestDir: "{app}"; Flags: ignoreversion
+; Г€Г±ГЇГ®Г«Г­ГїГҐГ¬Г»Г© ГґГ Г©Г«
+Source: "C:\Users\Home\Desktop\ГЈГЈГЈ\Algos5\Practice\Practice\bin\Debug\Practice.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Microsoft Visual Studio\2022\Community\dotnet\runtime\dotnet.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall; Check: not IsRequiredDotNetDetected
 ;------------------------------------------------------------------------------
-;   Указываем установщику, где он должен взять иконки
+;   Г“ГЄГ Г§Г»ГўГ ГҐГ¬ ГіГ±ГІГ Г­Г®ГўГ№ГЁГЄГі, ГЈГ¤ГҐ Г®Г­ Г¤Г®Г«Г¦ГҐГ­ ГўГ§ГїГІГј ГЁГЄГ®Г­ГЄГЁ
 ;------------------------------------------------------------------------------ 
 [Icons]
 
@@ -46,15 +47,15 @@ Name: "{group}\{#Name}"; Filename: "{app}\{#ExeName}"
 Name: "{commondesktop}\{#Name}"; Filename: "{app}\{#ExeName}"; Tasks: desktopicon
 [Code]
 //-----------------------------------------------------------------------------
-//  Проверка наличия нужного фреймворка
+//  ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г Г«ГЁГ·ГЁГї Г­ГіГ¦Г­Г®ГЈГ® ГґГ°ГҐГ©Г¬ГўГ®Г°ГЄГ 
 //-----------------------------------------------------------------------------
 function IsDotNetDetected(version: string; release: cardinal): boolean;
 
 var 
-    reg_key: string; // Просматриваемый подраздел системного реестра
-    success: boolean; // Флаг наличия запрашиваемой версии .NET
-    release45: cardinal; // Номер релиза для версии 4.5.x
-    key_value: cardinal; // Прочитанное из реестра значение ключа
+    reg_key: string; // ГЏГ°Г®Г±Г¬Г ГІГ°ГЁГўГ ГҐГ¬Г»Г© ГЇГ®Г¤Г°Г Г§Г¤ГҐГ« Г±ГЁГ±ГІГҐГ¬Г­Г®ГЈГ® Г°ГҐГҐГ±ГІГ°Г 
+    success: boolean; // Г”Г«Г ГЈ Г­Г Г«ГЁГ·ГЁГї Г§Г ГЇГ°Г ГёГЁГўГ ГҐГ¬Г®Г© ГўГҐГ°Г±ГЁГЁ .NET
+    release45: cardinal; // ГЌГ®Г¬ГҐГ° Г°ГҐГ«ГЁГ§Г  Г¤Г«Гї ГўГҐГ°Г±ГЁГЁ 4.5.x
+    key_value: cardinal; // ГЏГ°Г®Г·ГЁГІГ Г­Г­Г®ГҐ ГЁГ§ Г°ГҐГҐГ±ГІГ°Г  Г§Г­Г Г·ГҐГ­ГЁГҐ ГЄГ«ГѕГ·Г 
     sub_key: string;
 
 begin
@@ -62,7 +63,7 @@ begin
     success := false;
     reg_key := 'SOFTWARE\Microsoft\NET Framework Setup\NDP\';
     
-    // Вресия 3.0
+    // Г‚Г°ГҐГ±ГЁГї 3.0
     if Pos('v3.0', version) = 1 then
       begin
           sub_key := 'v3.0';
@@ -71,7 +72,7 @@ begin
           success := success and (key_value = 1);
       end;
 
-    // Вресия 3.5
+    // Г‚Г°ГҐГ±ГЁГї 3.5
     if Pos('v3.5', version) = 1 then
       begin
           sub_key := 'v3.5';
@@ -80,7 +81,7 @@ begin
           success := success and (key_value = 1);
       end;
 
-     // Вресия 4.0 клиентский профиль
+     // Г‚Г°ГҐГ±ГЁГї 4.0 ГЄГ«ГЁГҐГ­ГІГ±ГЄГЁГ© ГЇГ°Г®ГґГЁГ«Гј
      if Pos('v4.0 Client Profile', version) = 1 then
       begin
           sub_key := 'v4\Client';
@@ -89,7 +90,7 @@ begin
           success := success and (key_value = 1);
       end;
 
-     // Вресия 4.0 расширенный профиль
+     // Г‚Г°ГҐГ±ГЁГї 4.0 Г°Г Г±ГёГЁГ°ГҐГ­Г­Г»Г© ГЇГ°Г®ГґГЁГ«Гј
      if Pos('v4.0 Full Profile', version) = 1 then
       begin
           sub_key := 'v4\Full';
@@ -98,7 +99,7 @@ begin
           success := success and (key_value = 1);
       end;
 
-     // Вресия 4.5
+     // Г‚Г°ГҐГ±ГЁГї 4.5
      if Pos('v4.5', version) = 1 then
       begin
           sub_key := 'v4\Full';
@@ -111,20 +112,20 @@ begin
 
 end;
 //-----------------------------------------------------------------------------
-//  Функция-обертка для детектирования конкретной нужной нам версии
+//  Г”ГіГ­ГЄГ¶ГЁГї-Г®ГЎГҐГ°ГІГЄГ  Г¤Г«Гї Г¤ГҐГІГҐГЄГІГЁГ°Г®ГўГ Г­ГЁГї ГЄГ®Г­ГЄГ°ГҐГІГ­Г®Г© Г­ГіГ¦Г­Г®Г© Г­Г Г¬ ГўГҐГ°Г±ГЁГЁ
 //-----------------------------------------------------------------------------
 function IsRequiredDotNetDetected(): boolean;
 begin
     result := IsDotNetDetected('v4.0 Full Profile', 0);
 end;
 //-----------------------------------------------------------------------------
-//    Callback-функция, вызываемая при инициализации установки
+//    Callback-ГґГіГ­ГЄГ¶ГЁГї, ГўГ»Г§Г»ГўГ ГҐГ¬Г Гї ГЇГ°ГЁ ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГЁ ГіГ±ГІГ Г­Г®ГўГЄГЁ
 //-----------------------------------------------------------------------------
 function InitializeSetup(): boolean;
 begin
 
-  // Если нет тербуемой версии .NET выводим сообщение о том, что инсталлятор
-  // попытается установить её на данный компьютер
+  // Г…Г±Г«ГЁ Г­ГҐГІ ГІГҐГ°ГЎГіГҐГ¬Г®Г© ГўГҐГ°Г±ГЁГЁ .NET ГўГ»ГўГ®Г¤ГЁГ¬ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ Г® ГІГ®Г¬, Г·ГІГ® ГЁГ­Г±ГІГ Г«Г«ГїГІГ®Г°
+  // ГЇГ®ГЇГ»ГІГ ГҐГІГ±Гї ГіГ±ГІГ Г­Г®ГўГЁГІГј ГҐВё Г­Г  Г¤Г Г­Г­Г»Г© ГЄГ®Г¬ГЇГјГѕГІГҐГ°
   if not IsDotNetDetected('v4.0 Full Profile', 0) then
     begin
       MsgBox('{#Name} requires Microsoft .NET Framework 4.0 Full Profile.'#13#13
@@ -136,6 +137,6 @@ end;
 
 [Run]
 ;------------------------------------------------------------------------------
-;   Секция запуска после инсталляции
+;   Г‘ГҐГЄГ¶ГЁГї Г§Г ГЇГіГ±ГЄГ  ГЇГ®Г±Г«ГҐ ГЁГ­Г±ГІГ Г«Г«ГїГ¶ГЁГЁ
 ;------------------------------------------------------------------------------
 Filename: {tmp}\dotNetFx40_Full_x86_x64.exe; Parameters: "/q:a /c:""install /l /q"""; Check: not IsRequiredDotNetDetected; StatusMsg: Microsoft Framework 4.0 is installed. Please wait...
